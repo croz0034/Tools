@@ -1,5 +1,6 @@
 /////////////////////////HTML creation tools by Tyler//////////////
 var Tryeltech = {
+    x: 0,
 
 create: function(targetID, HTMLCode){
     if(!document.getElementById(targetID)){alert("Target ID ground not found"); return}
@@ -26,21 +27,33 @@ addtext: function(targetID, text2add){
     return}
     alert("Target ID ground not found");
 },
+    fetchJSON: function(URL, fnName){
+                      fetch(URL)
+                .then(response => response.json())
+                .then(data => {
+                          fnName(data);
+                      })
+                .catch(err => {
+                console.log(err)
+                })
+        
+        
+    },
     
     
-    
-/////////////////////////Dev Aids///////////////////////////
+/////////////////////////Dev Broken Junk///////////////////////////
 TargetLock(){
-    let maindock = document.querySelector("body");
+    let maindock = document.getElementById("round2");
     
-        let x = 0;
     
     for (elements of maindock.childNodes){
-        elements.addEventListener('click', (ev)=>{
-            let targetLock = JSON.stringify(this);
-            alert(`element ${x}`);})
-                                  
-        x++
+        elements.addEventListener('click', Targetor);
+        elements.id = Tryeltech.x + "tagnote";
+        function Targetor(ev){
+            ()=>{alert(elements.id);}
+               
+        }
+                 
                                                   }
     }
 }
@@ -73,7 +86,7 @@ document.addEventListener('DOMContentLoaded', test);
 
 function test(ev){
     Tryeltech.makebutton('test', stage2);
-    Tryeltech.makebutton('test', additionaltest);;
+//    Tryeltech.makebutton('test', additionaltest);
 };
 
 
@@ -81,8 +94,3 @@ function stage2(ev){
     Tryeltech.create('round2', 
 '<h1 id="57" class="7"> I would call this a sucess </h1><p> yup </p>')
 };
-function additionaltest(ev){
-    Tryeltech.addtext('round2', "this works too");
-    
-    Tryeltech.TargetLock();
-}
