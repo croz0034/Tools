@@ -46,24 +46,36 @@ addtext: function(targetID, text2add){
 
 
 let Persistent = {
-    Object: function(key = 'Tryeltech'){
+    Object: function(key = 'Tryeltech', Data){
+        let Contents = localStorage.getItem(key);
+        if (Contents) {
+           return Contents;
+        }
+        
+            Persistent.Update(Data, key);
+        return Data
+    },
+    
+    String: function(key = 'Tryeltech', Data){
         let Contents = localStorage.getItem(key);
         if (Contents) {
             
-           return Contents;
+           return JSON.stringify(Contents);
         }
-        console.log('no data yet');
-        return "";
+       
+            Persistent.Update(Data, key);
+        return Data
     },
     
-    Array: function(key = 'Tryeltech'){
+    Array: function(key = 'Tryeltech', Data){
         let Contents = localStorage.getItem(key);
         if (Contents) {
             Contents = Contents.split(',');
            return Contents;
         }
-        console.log('no data yet');
-        return "";
+        
+            Persistent.Update(Data, key);
+        return Data
         
     },
     
@@ -74,6 +86,7 @@ let Persistent = {
         localStorage.setItem(key, update);
         return Data;
     },
+    
     Push: function(Data = [], key = 'Tryeltech'){
         let previous = localStorage.getItem(key);
         if(previous){
@@ -103,6 +116,7 @@ let Persistent = {
     Persistent.Update(contents);
     return contents
 },
+    
     Remove: function(key = 'Tryeltech'){
         localStorage.removeItem(key);
     }
@@ -122,7 +136,7 @@ let Persistent = {
 
 let test = function(ev){
 
-    Persistent.Object();
+    Persistent.Object('Tryeltech', 5);
     Persistent.Push
 (3)
     console.log(Persistent.Array());}
