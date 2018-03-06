@@ -101,9 +101,11 @@ let Persistent = {
         }
         return previous
     },
-    Pop: function(Data = [], key = 'Tryeltech'){
+    Pop: function(key = 'Tryeltech'){
         let previous = localStorage.getItem(key);
-        previous.pop(Data);
+        previous = previous.split(',');
+        console.log(typeof(previous));
+        previous.pop();
         Persistent.Update(previous, key);
         return previous
     },
@@ -137,8 +139,7 @@ let Persistent = {
 let test = function(ev){
 
     Persistent.Object('Tryeltech', 5);
-    Persistent.Push
-(3)
+    Persistent.Push(3)
     console.log(Persistent.Array());}
 
 
